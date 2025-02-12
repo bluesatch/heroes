@@ -33,7 +33,7 @@ const heroes = [
         alias: 'spawn',
         powers: ['immortality', 'super strength','regenerate', 'necroplasm manipulation'],
         franchise: 'image',
-        team: null,
+        team: [],
         alignment: true,
         rivals: ['violator', 'a devil', 'billy kinkaid', 'the redeemer'],
         species: 'hellspawn',
@@ -177,7 +177,7 @@ const heroes = [
         alias: 'kite man',
         powers: ['can fly kites'],
         franchise: 'dc',
-        team: null,
+        team: [],
         alignment: false,
         rivals: ['batman', 'catwoman', 'swamp thing'],
         species: 'human',
@@ -213,7 +213,7 @@ const heroes = [
         alias: 'dr doom',
         powers: ['magic', 'smart', 'money'],
         franchise: 'marvel',
-        team: null,
+        team: [],
         alignment: false,
         rivals: ['fantastic four', 'hulk', 'x-men', 'black panther', 'mephistio'],
         species: 'human',
@@ -285,7 +285,7 @@ const heroes = [
         alias: 'venom',
         powers: ['goop', 'symbiote suit', 'super strength'],
         franchise: 'marvel',
-        team: null,
+        team: [],
         alignment: false,
         rivals: ['spider-man', 'carnage', 'knull', 'shield'],
         species: 'alien',
@@ -441,6 +441,17 @@ const heroes = [
 const row = document.getElementById('row')
 
 const makeList =(el, arr)=> {
+
+    if (arr.length == 0) {
+        const li = document.createElement('li')
+
+        li.classList.add('list-group-item')
+
+        li.innerText = 'none'
+
+        el.appendChild(li)
+    }
+
     arr.forEach(item => {
         const li = document.createElement('li')
         li.classList.add('list-group-item', 'text-capitalize')
@@ -456,7 +467,7 @@ const buildCards =(obj)=> {
 
 
     //make sure that row is empty
-    row.innerHTML = ''
+    // row.innerHTML = ''
 
     const column = document.createElement('div')
     column.classList.add('col')
@@ -471,8 +482,8 @@ const buildCards =(obj)=> {
     const cardHeader = document.createElement('div')
     cardHeader.classList.add('card-header')
 
-    const alias = document.createElement('h2')
-    alias.classList.add('text-capitalize', 'display-5')
+    const alias = document.createElement('h4')
+    alias.classList.add('text-capitalize')
     alias.innerText = obj.alias
 
     const heroName = document.createElement('p')
@@ -486,7 +497,9 @@ const buildCards =(obj)=> {
     const powersList = document.createElement('ul')
     powersList.classList.add('list-group', 'list-group-flush')
 
-    makeList(powersList, obj.powers)
+    if (typeof(obj.powers) === 'object') {
+        makeList(powersList, obj.powers)
+    }
 
     const teamsLabel = document.createElement('h3')
     teamsLabel.classList.add('text-capitalize', 'text-primary')
@@ -495,7 +508,9 @@ const buildCards =(obj)=> {
     const teamsList = document.createElement('ul')
     teamsList.classList.add('list-group', 'list-group-flush')
 
-    makeList(teamsList, obj.team)
+    if (typeof(obj.team) === 'object') {
+        makeList(teamsList, obj.team)
+    }
 
     const rivalsLabel = document.createElement('h3')
     rivalsLabel.classList.add('text-capitalize', 'text-primary')
@@ -504,7 +519,9 @@ const buildCards =(obj)=> {
     const rivalsList = document.createElement('ul')
     rivalsList.classList.add('list-group', 'list-group-flush')
 
-    makeList(rivalsList, obj.rivals)
+    if (typeof(obj.rivals) === 'object') {
+        makeList(rivalsList, obj.rivals)
+    }
 
     // obj.rivals.forEach(rival => {
     //     const li = document.createElement('li')
@@ -548,4 +565,5 @@ const buildCards =(obj)=> {
 
 }
 
-buildCards(heroes[0])
+// buildCards(heroes[0])
+heroes.forEach(hero => buildCards(hero))
