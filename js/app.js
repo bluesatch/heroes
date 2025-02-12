@@ -566,4 +566,56 @@ const buildCards =(obj)=> {
 }
 
 // buildCards(heroes[0])
-heroes.forEach(hero => buildCards(hero))
+
+// Abstract forEach loop
+// heroes.forEach(hero => buildCards(hero))
+
+const loadCards =(arr)=> {
+    arr.forEach(item => buildCards(item))
+}
+
+const loadBtn = document.getElementById('loadBtn')
+
+/**
+ * document.addEventListener(event, callBack function)
+ */
+loadBtn.addEventListener('click', (e)=> {
+    e.preventDefault()
+    row.innerHTML = ''
+
+    const filter = document.getElementById('filter').value 
+
+    //Object.keys(obj) => return an array of the keys of an object
+    //Object.values(obj) => returns an array of the values of an object
+
+    //arr.includes(item) => returns a boolean if item is in arr
+
+    let cards = heroes.filter(hero => Object.values(hero).includes(filter))
+
+
+    console.log(cards);
+    
+
+    loadCards(cards)
+})
+
+
+/**
+ * arr.filter() => return a copy array after an original array has been filtered through
+ */
+
+
+/*
+
+DECLARATIVE!
+let dcHeroes = []
+
+for (let hero of heroes) {
+    if (hero.franchise == 'dc') {
+        dcHeroes = [...dcHeroes, hero]
+    }
+}
+*/
+
+
+
