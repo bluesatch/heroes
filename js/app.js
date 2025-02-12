@@ -436,3 +436,48 @@ const heroes = [
         firstApp: new Date('February 1, 1991')
     }
 ]
+
+/** Build cards **/
+const row = document.getElementById('row')
+
+const buildCards =(obj)=> {
+
+
+    //make sure that row is empty
+    row.innerHTML = ''
+
+    const column = document.createElement('div')
+    column.classList.add('col')
+
+    const card = document.createElement('div')
+    card.classList.add('card')
+    card.setAttribute('id', `card-${obj.id}`)
+
+    const cardBody = document.createElement('div')
+    cardBody.classList.add('card-body')
+
+    const cardHeader = document.createElement('div')
+    cardHeader.classList.add('card-header')
+
+    const alias = document.createElement('h2')
+    alias.classList.add('text-capitalize', 'display-5')
+    alias.innerText = obj.alias
+
+    const heroName = document.createElement('p')
+    heroName.classList.add('text-capitalize', 'fst-italic')
+    heroName.innerText = obj.name
+
+    cardHeader.appendChild(alias)
+    cardHeader.appendChild(heroName)
+    // append more children here to cardBody 
+
+    card.appendChild(cardHeader)
+
+    card.appendChild(cardBody)
+    column.appendChild(card)
+
+    row.appendChild(column)
+
+}
+
+buildCards(heroes[0])
